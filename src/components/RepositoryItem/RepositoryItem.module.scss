@@ -1,0 +1,72 @@
+@use "src/assets/theme";
+
+.repositoryItemWrap {
+  height: 224px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  display: grid;
+  column-gap: 32px;
+  grid-template-columns: auto auto 1fr;
+  place-items: center;
+  box-sizing: border-box;
+
+  .avatar {
+    width: 128px;
+    height: 144px;
+  }
+
+  .repositoryInfo {
+    display: grid;
+    align-self: flex-start;
+    row-gap: 5px;
+
+    span::first-letter {
+      text-transform: capitalize;
+    }
+
+    .repositoryName {
+      font-family: "DM Serif Display";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 25px;
+      color: #081f32;
+    }
+
+    .repositoryAuthor,
+    .repositoryLang,
+    .repositoryDescription {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 25px;
+      color: #a5adbb;
+    }
+
+    .repositoryDescription {
+      color: #6e798c;
+    }
+  }
+
+  .repositoryStatistick {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 25px;
+    color: #081f32;
+    justify-self: flex-end;
+    row-gap: 20px;
+    display: grid;
+    min-width: 160px;
+
+    .statistickRow {
+      display: grid;
+      column-gap: 10px;
+      grid-template-columns: 30px 1fr;
+      align-items: center;
+    }
+  }
+}

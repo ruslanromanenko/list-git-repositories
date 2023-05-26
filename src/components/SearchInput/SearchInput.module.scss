@@ -1,0 +1,26 @@
+.searchInput {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.04),
+    0px 4px 24px rgba(51, 51, 51, 0.24);
+  border-radius: 4px;
+  height: 56px;
+  width: 100%;
+  border: none;
+  outline: none;
+  margin-bottom: 15px;
+  padding: 16px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 20px;
+
+  &::placeholder {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: rgba(17, 17, 17, 0.48);
+  }
+}

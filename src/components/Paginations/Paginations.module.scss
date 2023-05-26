@@ -1,0 +1,46 @@
+.paginationWrap {
+  display: grid;
+  place-items: center;
+  grid-auto-flow: column;
+  position: sticky;
+  bottom: 15px;
+  margin-top: 20px;
+  justify-self: center;
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  color: #000000;
+  column-gap: 5px;
+
+  .page {
+    width: 30px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .activePage {
+    &::after {
+      content: "";
+      height: 3px;
+      width: 30px;
+      background-color: #65b79a;
+      display: block;
+      bottom: -10px;
+      position: absolute;
+    }
+  }
+
+  .button {
+    border: none;
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    color: #000000;
+    background: transparent;
+    cursor: pointer;
+  }
+}
