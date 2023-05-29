@@ -29,17 +29,19 @@ export const Paginations: FC<PaginationsProps> = ({
       >
         Previous
       </button>
-      {pages?.map((page) => (
-        <span
-          key={page}
-          className={cs(classes.page, {
-            [classes.activePage]: page === activePage,
-          })}
-          onClick={(e) => onClickActivePage(e)}
-        >
-          {page}
-        </span>
-      ))}
+      <div className={classes.paginationPages}>
+        {pages?.map((page) => (
+          <span
+            key={page}
+            className={cs(classes.page, {
+              [classes.activePage]: page === activePage,
+            })}
+            onClick={(e) => onClickActivePage(e)}
+          >
+            {page}
+          </span>
+        ))}
+      </div>
       <button
         className={classes.button}
         onClick={onClickNextPage}

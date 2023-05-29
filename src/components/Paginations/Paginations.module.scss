@@ -1,7 +1,7 @@
 .paginationWrap {
   display: grid;
   place-items: center;
-  grid-auto-flow: column;
+  grid-template-columns: auto auto auto;
   position: sticky;
   bottom: 15px;
   margin-top: 20px;
@@ -14,21 +14,30 @@
   color: #000000;
   column-gap: 5px;
 
-  .page {
-    width: 30px;
-    cursor: pointer;
-    text-align: center;
-  }
+  .paginationPages {
+    display: grid;
+    min-width: 250px;
+    column-gap: 5px;
+    grid-auto-flow: column;
 
-  .activePage {
-    &::after {
-      content: "";
-      height: 3px;
-      width: 30px;
-      background-color: #65b79a;
-      display: block;
-      bottom: -10px;
-      position: absolute;
+    .page {
+      cursor: pointer;
+      text-align: center;
+      user-select: none;
+    }
+
+    .activePage {
+      position: relative;
+
+      &::after {
+        content: "";
+        height: 3px;
+        width: 100%;
+        background-color: #65b79a;
+        display: block;
+        bottom: -10px;
+        position: absolute;
+      }
     }
   }
 
@@ -39,7 +48,6 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 20px;
-    color: #000000;
     background: transparent;
     cursor: pointer;
   }

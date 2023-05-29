@@ -9,5 +9,6 @@ main {
     width: 100%;
     max-width: 1340px;
     display: grid;
+    grid-template-rows: auto 1fr auto;
   }
 }
