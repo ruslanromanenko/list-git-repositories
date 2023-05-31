@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "https://ruslanromanenko.github.io/list-git-repositories/static/css/main.57c231ec.css",
-    "main.js": "https://ruslanromanenko.github.io/list-git-repositories/static/js/main.65c2b042.js",
+    "main.css": "https://ruslanromanenko.github.io/list-git-repositories/static/css/main.b85cdb0e.css",
+    "main.js": "https://ruslanromanenko.github.io/list-git-repositories/static/js/main.2456dc85.js",
     "static/media/OpenSans-Regular.ttf": "https://ruslanromanenko.github.io/list-git-repositories/static/media/OpenSans-Regular.a5fe783dd47c116806f9.ttf",
     "static/media/Archivo-Regular.ttf": "https://ruslanromanenko.github.io/list-git-repositories/static/media/Archivo-Regular.0d9de85f605c2178d907.ttf",
     "static/media/DMSerifDisplay-Regular.ttf": "https://ruslanromanenko.github.io/list-git-repositories/static/media/DMSerifDisplay-Regular.ef3c642c5fd9ae15682f.ttf",
     "index.html": "https://ruslanromanenko.github.io/list-git-repositories/index.html",
-    "main.57c231ec.css.map": "https://ruslanromanenko.github.io/list-git-repositories/static/css/main.57c231ec.css.map",
-    "main.65c2b042.js.map": "https://ruslanromanenko.github.io/list-git-repositories/static/js/main.65c2b042.js.map"
+    "main.b85cdb0e.css.map": "https://ruslanromanenko.github.io/list-git-repositories/static/css/main.b85cdb0e.css.map",
+    "main.2456dc85.js.map": "https://ruslanromanenko.github.io/list-git-repositories/static/js/main.2456dc85.js.map"
   },
   "entrypoints": [
-    "static/css/main.57c231ec.css",
-    "static/js/main.65c2b042.js"
+    "static/css/main.b85cdb0e.css",
+    "static/js/main.2456dc85.js"
   ]
 }
