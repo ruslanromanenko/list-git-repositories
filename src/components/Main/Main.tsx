@@ -1,69 +1,60 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RepositoriesList } from "../RepositoriesList";
 import { SearchInput } from "../SearchInput";
 import classes from "./Main.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectRepositories,
-  fetchRepositoriesAsync,
-  setKeyword,
-  setPage,
-} from "../../store/repositoriesSlice";
 import { Paginations } from "../Paginations";
-import { log } from "console";
+import { fetchRepositoriesAsync } from "../../store/operations";
+import { selectRepositories } from "../../store/selectors";
 
 export const Main = () => {
   const dispatch = useDispatch();
 
-  const { data, keyword, activePage, perPage, totalCount } =
-    useSelector(selectRepositories);
+  const [keyword, setKeyword] = useState<string>("react");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const PER_PAGE: number = 3;
+
+  const { repositoriesData, totalCount } = useSelector(selectRepositories);
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setKeyword(e.target.value));
-  };
-
-  const handleSearch = () => {
-    dispatch(setPage(1));
-    dispatch(fetchRepositoriesAsync());
+    setKeyword(e.target.value);
   };
 
   const maxPage: number = useMemo(
-    () => Math.ceil(totalCount / perPage),
-    [totalCount, perPage]
+    () => Math.ceil(totalCount / PER_PAGE),
+    [totalCount, PER_PAGE]
   );
 
   useEffect(() => {
     if (keyword) {
       const timeoutId = setTimeout(() => {
-        handleSearch();
+        dispatch(
+          fetchRepositoriesAsync({ keyword, currentPage, perPage: PER_PAGE })
+        );
       }, 1000);
 
       return () => clearTimeout(timeoutId);
     }
-  }, [keyword]);
+  }, [keyword, currentPage, dispatch]);
 
   const handlePrevPage = () => {
-    if (activePage > 1) {
-      dispatch(setPage(activePage - 1));
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
   const handleNextPage = () => {
-    if (activePage < maxPage) {
-      dispatch(setPage(activePage + 1));
+    if (currentPage < maxPage) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const handleActivePage = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ) => {
-    dispatch(setPage(Number(e.currentTarget.textContent)));
+    setCurrentPage(Number(e.currentTarget.textContent));
   };
-
-  useEffect(() => {
-    console.log(activePage);
-    dispatch(fetchRepositoriesAsync());
-  }, [activePage]);
 
   return (
     <main>
@@ -71,12 +62,12 @@ export const Main = () => {
         <SearchInput keyword={keyword} onKeywordChange={handleKeywordChange} />
         <RepositoriesList />
         <Paginations
-          activePage={activePage}
+          activePage={currentPage}
           maxPage={maxPage}
           onClickPrevPage={handlePrevPage}
           onClickNextPage={handleNextPage}
           onClickActivePage={handleActivePage}
-          data={data}
+          repositories={repositoriesData}
         />
       </div>
     </main>

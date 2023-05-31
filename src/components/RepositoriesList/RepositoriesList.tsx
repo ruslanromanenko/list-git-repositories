@@ -1,36 +1,25 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectRepositories,
-  fetchRepositoriesAsync,
-} from "../../store/repositoriesSlice";
+import React from "react";
+import { useSelector } from "react-redux";
 import { RepositoryItem } from "../RepositoryItem";
 import classes from "./RepositoriesList.module.scss";
+import { Statuses } from "../../types/enums/Statuses";
+import { selectRepositories } from "../../store/selectors";
 
-export const RepositoriesList: React.FC = () => {
-  const dispatch = useDispatch();
-  const { data, loading, error, activePage, perPage } =
-    useSelector(selectRepositories);
-
-  useEffect(() => {
-    dispatch(fetchRepositoriesAsync());
-  }, [dispatch, activePage, perPage]);
+export const RepositoriesList: React.FC<RepositoriesListProps> = () => {
+  const { repositoriesData, status, error } = useSelector(selectRepositories);
 
   return (
     <>
-      {loading ? (
-        <div>Завантаження...</div>
-      ) : error ? (
-        <div>Помилка: {error}</div>
-      ) : (
+      {status === Statuses.Loading && <div>Завантаження...</div>}
+      {error && <div>Помилка: {error}</div>}
+      {status === Statuses.Resolved && (
         <>
           <div className={classes.repositoriesListWrap}>
-            {data.map((repository) => (
+            {repositoriesData?.map((repository) => (
               <RepositoryItem key={repository.id} repository={repository} />
             ))}
           </div>
-
-          {data.length === 0 && (
+          {repositoriesData.length === 0 && (
             <div>По Вашому запиту не знайдено жодного репозиторія</div>
           )}
         </>
@@ -38,3 +27,5 @@ export const RepositoriesList: React.FC = () => {
     </>
   );
 };
+
+type RepositoriesListProps = {};

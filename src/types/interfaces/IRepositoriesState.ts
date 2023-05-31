@@ -1,11 +1,9 @@
+import { Statuses } from "../enums/Statuses";
 import { IRepository } from "./IRepository";
 
 export interface IRepositoriesState {
-  data: IRepository[];
-  loading: boolean;
+  repositoriesData: IRepository[];
+  status: Statuses;
   error: string | null;
-  keyword: string;
-  activePage: number;
-  perPage: number;
   totalCount: number;
 }

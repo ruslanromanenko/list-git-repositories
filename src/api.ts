@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = "https://api.github.com/search/repositories";
 
 export const fetchRepositories = async (
-  keyword: string,
+  keyword: string = "react",
   page = 1,
   perPage = 20
 ) => {

@@ -47,6 +47,8 @@
 
     .repositoryDescription {
       color: #6e798c;
+      overflow: auto;
+      max-height: 80px;
     }
   }
 

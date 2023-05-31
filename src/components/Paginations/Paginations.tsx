@@ -10,7 +10,7 @@ export const Paginations: FC<PaginationsProps> = ({
   onClickPrevPage,
   onClickNextPage,
   onClickActivePage,
-  data,
+  repositories,
 }) => {
   const [pages, setPages] = useState<number[]>([]);
 
@@ -45,7 +45,7 @@ export const Paginations: FC<PaginationsProps> = ({
       <button
         className={classes.button}
         onClick={onClickNextPage}
-        disabled={data.length === 0}
+        disabled={repositories.length === 0}
       >
         Next
       </button>
@@ -58,5 +58,5 @@ type PaginationsProps = {
   onClickPrevPage: () => void;
   onClickNextPage: () => void;
   onClickActivePage: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-  data: IRepository[];
+  repositories: IRepository[];
 };
