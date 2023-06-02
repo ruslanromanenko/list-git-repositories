@@ -1,25 +1,16 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { IRepository } from "../../types/interfaces/IRepository";
-import { createPages } from "../../utils";
 import classes from "./Paginations.module.scss";
 import cs from "classnames";
 
 export const Paginations: FC<PaginationsProps> = ({
+  pages,
   activePage,
-  maxPage,
   onClickPrevPage,
   onClickNextPage,
   onClickActivePage,
   repositories,
 }) => {
-  const [pages, setPages] = useState<number[]>([]);
-
-  useEffect(() => {
-    if (maxPage > 0) {
-      setPages(createPages(maxPage, activePage));
-    }
-  }, [maxPage, activePage]);
-
   return (
     <div className={classes.paginationWrap}>
       <button
@@ -53,8 +44,8 @@ export const Paginations: FC<PaginationsProps> = ({
   );
 };
 type PaginationsProps = {
+  pages: number[];
   activePage: number;
-  maxPage: number;
   onClickPrevPage: () => void;
   onClickNextPage: () => void;
   onClickActivePage: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Paginations } from "../Paginations";
 import { fetchRepositoriesAsync } from "../../store/operations";
 import { selectRepositories } from "../../store/selectors";
+import useDebounce from "../../custom-hooks/useDebounce";
+import { createPages } from "../../utils";
 
 export const Main = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ export const Main = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const PER_PAGE: number = 3;
+  const DELAY = 1000;
 
   const { repositoriesData, totalCount } = useSelector(selectRepositories);
 
@@ -21,22 +24,30 @@ export const Main = () => {
     setKeyword(e.target.value);
   };
 
+  const keywordWithDebounce = useDebounce(keyword, DELAY);
+  const currentPageWithDebounce = useDebounce(currentPage, DELAY);
+
   const maxPage: number = useMemo(
     () => Math.ceil(totalCount / PER_PAGE),
     [totalCount, PER_PAGE]
   );
 
-  useEffect(() => {
-    if (keyword) {
-      const timeoutId = setTimeout(() => {
-        dispatch(
-          fetchRepositoriesAsync({ keyword, currentPage, perPage: PER_PAGE })
-        );
-      }, 1000);
+  const [pages, setPages] = useState<number[]>([]);
 
-      return () => clearTimeout(timeoutId);
+  useEffect(() => {
+    if (keywordWithDebounce) {
+      dispatch(
+        fetchRepositoriesAsync({
+          keywordWithDebounce,
+          currentPageWithDebounce,
+          perPage: PER_PAGE,
+        })
+      );
     }
-  }, [keyword, currentPage, dispatch]);
+    if (maxPage && currentPageWithDebounce) {
+      setPages(createPages(maxPage, currentPageWithDebounce));
+    }
+  }, [keywordWithDebounce, currentPageWithDebounce, dispatch, maxPage]);
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -55,15 +66,14 @@ export const Main = () => {
   ) => {
     setCurrentPage(Number(e.currentTarget.textContent));
   };
-
   return (
     <main>
       <div className={classes.container}>
         <SearchInput keyword={keyword} onKeywordChange={handleKeywordChange} />
         <RepositoriesList />
         <Paginations
+          pages={pages}
           activePage={currentPage}
-          maxPage={maxPage}
           onClickPrevPage={handlePrevPage}
           onClickNextPage={handleNextPage}
           onClickActivePage={handleActivePage}
